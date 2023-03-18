@@ -1,4 +1,4 @@
-package sistemaexperto;
+package com.hg.libroia.sistemaexperto.hechos;
 
 // Interface para todos los hechos que se debe implementar
 public interface IHecho {

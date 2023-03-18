@@ -1,9 +1,11 @@
-package sistemaexperto;
+package com.hg.libroia.sistemaexperto.bases;
 
 import java.util.ArrayList;
 
+import com.hg.libroia.sistemaexperto.reglas.Regla;
+
 // Clase que gestiona la base de reglas
-class BaseDeReglas {
+public class BaseDeReglas {
     // Lista de las reglas
     protected ArrayList<Regla> reglas;
     public ArrayList<Regla> getReglas() {
@@ -12,7 +14,7 @@ class BaseDeReglas {
     public void setReglas(ArrayList<Regla> _reglas) {
         // Se copia las reglas y se añaden
         for (Regla r : _reglas) {
-            Regla copia = new Regla(r.nombre, r.premisas, r.conclusion);
+            Regla copia = new Regla(r.getNombre(), r.getPremisas(), r.getConclusion());
             reglas.add(copia);
         }
     }

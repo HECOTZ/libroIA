@@ -1,28 +1,35 @@
-package sistemaexperto;
+package com.hg.libroia.sistemaexperto.motor;
 
 import java.util.ArrayList;
 
+import com.hg.libroia.sistemaexperto.bases.BaseDeHechos;
+import com.hg.libroia.sistemaexperto.bases.BaseDeReglas;
+import com.hg.libroia.sistemaexperto.hechos.IHM;
+import com.hg.libroia.sistemaexperto.hechos.IHecho;
+import com.hg.libroia.sistemaexperto.hechos.impl.HechoFactory;
+import com.hg.libroia.sistemaexperto.reglas.Regla;
+
 // Motor de inferencias del sistema experto
-public class MotorInterferencias {
+public class MotorInferencias {
     private BaseDeHechos bdf;
     private BaseDeReglas bdr;
     private IHM ihm;
     private int nivelMaxRegla;
     
     // Constructor
-    public MotorInterferencias(IHM _ihm) {
+    public MotorInferencias(IHM _ihm) {
         ihm = _ihm;
         bdf = new BaseDeHechos();
         bdr = new BaseDeReglas();
     }
     
     // Solicita un valor entero al ihm
-    int PedirValorEntero(String pregunta) {
+    public int PedirValorEntero(String pregunta) {
         return ihm.PedirValorEntero(pregunta);
     }
     
     // Solicita un valor booleano al ihm
-    boolean PedirValorBooleano(String pregunta) {
+    public boolean PedirValorBooleano(String pregunta) {
         return ihm.PedirValorBooleano(pregunta);
     }
     
@@ -82,7 +89,7 @@ public class MotorInterferencias {
         Regla r = BuscadorRegla(bdrLocale);
         while(r!=null) {
             // Aplicar la regla
-            IHecho nuevoHecho = r.conclusion;
+            IHecho nuevoHecho = r.getConclusion();
             nuevoHecho.setNivel(nivelMaxRegla + 1);
             bdf.AgregarHecho(nuevoHecho);
             // Eliminar la regla de las posibles

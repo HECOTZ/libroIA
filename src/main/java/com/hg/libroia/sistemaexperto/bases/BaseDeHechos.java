@@ -1,9 +1,11 @@
-package sistemaexperto;
+package com.hg.libroia.sistemaexperto.bases;
 
 import java.util.ArrayList;
 
+import com.hg.libroia.sistemaexperto.hechos.IHecho;
+
 // Clase que gestiona la base de hechos
-class BaseDeHechos {
+public class BaseDeHechos {
     // Lista de los hechos
     protected ArrayList<IHecho> hechos; 
     public ArrayList<IHecho> getHechos () { 
@@ -22,7 +24,7 @@ class BaseDeHechos {
     
     // Agregar un hecho
     public void AgregarHecho(IHecho hecho) {
-        hechos.add(fait);
+        hechos.add(hecho);
     }
     
     // Buscar un hecho a partir de su nomnre, null si no existe

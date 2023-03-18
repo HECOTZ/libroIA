@@ -1,16 +1,19 @@
-package sistemaexperto;
+package com.hg.libroia.sistemaexperto.hechos.impl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.hg.libroia.sistemaexperto.hechos.IHecho;
+import com.hg.libroia.sistemaexperto.motor.MotorInferencias;
+
 // Clase que permtite crear los hechos, independientemente de su tipo
-class HechoFactory {
+public class HechoFactory {
     // Crea un nuevo hecho rellenando el valor dado por el usuario
-    static IHecho Hecho(IHecho f, MotorInterferencias m) {
+    public static IHecho Hecho(IHecho f, MotorInferencias m) {
         try {
             IHecho nuevoHecho;
             Class clase = f.getClass();
-            if (clase.equals(Class.forName("sistemaexperto.HechoEntero"))) {
+            if (clase.equals(Class.forName("com.hg.libroia.sistemaexperto.HechoEntero"))) {
                 nuevoHecho = CrearHechoEntero(f, m);
             }
             else {
@@ -24,19 +27,19 @@ class HechoFactory {
     }
     
     // Crea un hecho entero
-    static IHecho CrearHechoEntero(IHecho f, MotorInterferencias m) {
+    static IHecho CrearHechoEntero(IHecho f, MotorInferencias m) {
         int valor = m.PedirValorEntero(f.Pregunta());
         return new HechoEntero(f.Nombre(), valor, null, 0);
     }
 
     // Crea un hecho booleano
-    static IHecho CrearHechoBooleen(IHecho f, MotorInterferencias m) {    
+    static IHecho CrearHechoBooleen(IHecho f, MotorInferencias m) {    
         boolean valorB = m.PedirValorBooleano(f.Pregunta());
         return new HechoBooleen(f.Nombre(), valorB, null, 0);
     }
 
     // Crea un nuevo hecho a partir de su cadena
-    static IHecho Hecho(String hechoStr) {
+    public static IHecho Hecho(String hechoStr) {
         hechoStr = hechoStr.trim();
         if (hechoStr.contains("=")) {
             // Existe el símbolo "=", por lo que es un hecho entero

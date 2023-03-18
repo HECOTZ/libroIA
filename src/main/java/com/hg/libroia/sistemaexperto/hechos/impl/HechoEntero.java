@@ -1,36 +1,33 @@
-package sistemaexperto;
+package com.hg.libroia.sistemaexperto.hechos.impl;
+
+import com.hg.libroia.sistemaexperto.hechos.IHecho;
 
 // Clase para los hechos enteros (como el número de aldos)
 class HechoEntero implements IHecho {
 
     // Nombre del hecho
     protected String nombre;    
-    @Override
     public String Nombre() {
         return nombre;
     }
 
     // Valor entero asociado
     protected int valor;
-    @Override
     public Object Valor() {
         return valor;
     }
 
     // Nivel (0 para los hechos como entrada)
     protected int nivel;
-    @Override
     public int Nivel() {
         return nivel;
     }
-    @Override
     public void setNivel(int l) {
         nivel = l;
     }
     
     // Pregunta que hay que hacer al usuario si es necesario
     protected String pregunta = "";
-    @Override
     public String Pregunta() {
         return pregunta;
     }

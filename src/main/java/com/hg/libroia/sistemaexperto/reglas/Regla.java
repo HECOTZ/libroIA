@@ -1,7 +1,9 @@
-package sistemaexperto;
+package com.hg.libroia.sistemaexperto.reglas;
 
 import java.util.ArrayList;
 import java.util.StringJoiner;
+
+import com.hg.libroia.sistemaexperto.hechos.IHecho;
 
 // Representa una regla del sistema experto
 public class Regla {

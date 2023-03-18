@@ -1,6 +1,8 @@
-package sistemaexperto;
+package com.hg.libroia.sistemaexperto.hechos;
 
 import java.util.ArrayList;
+
+import com.hg.libroia.sistemaexperto.reglas.Regla;
 
 public interface IHM {
     int PedirValorEntero(String pregunta); 
