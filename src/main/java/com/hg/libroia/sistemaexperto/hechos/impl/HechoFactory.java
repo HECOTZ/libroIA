@@ -1,45 +1,48 @@
 package com.hg.libroia.sistemaexperto.hechos.impl;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.hg.libroia.sistemaexperto.hechos.IHecho;
 import com.hg.libroia.sistemaexperto.motor.MotorInferencias;
 
-// Clase que permtite crear los hechos, independientemente de su tipo
+// Clase que permite crear los hechos, independientemente de su tipo
 public class HechoFactory {
+
+	private static Logger logger = LoggerFactory.getLogger(HechoFactory.class);
+	
     // Crea un nuevo hecho rellenando el valor dado por el usuario
-    public static IHecho Hecho(IHecho f, MotorInferencias m) {
+    public static IHecho hecho(IHecho iHecho, MotorInferencias motorInferencias) {
         try {
             IHecho nuevoHecho;
-            Class clase = f.getClass();
-            if (clase.equals(Class.forName("com.hg.libroia.sistemaexperto.HechoEntero"))) {
-                nuevoHecho = CrearHechoEntero(f, m);
+            Class<? extends IHecho> clase = iHecho.getClass();
+            if (clase.equals(Class.forName("com.hg.libroia.sistemaexperto.hechos.impl.HechoEntero"))) {
+                nuevoHecho = crearHechoEntero(iHecho, motorInferencias);
             }
             else {
-                nuevoHecho = CrearHechoBooleen(f, m);
+                nuevoHecho = crearHechoBooleen(iHecho, motorInferencias);
             }
             return nuevoHecho;
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HechoFactory.class.getName()).log(Level.SEVERE, null, ex);
+        	logger.error("Error al crear nuevo Hecho", ex);
             return null;
         }
     }
     
     // Crea un hecho entero
-    static IHecho CrearHechoEntero(IHecho f, MotorInferencias m) {
-        int valor = m.PedirValorEntero(f.Pregunta());
-        return new HechoEntero(f.Nombre(), valor, null, 0);
+    static IHecho crearHechoEntero(IHecho iHecho, MotorInferencias motorInferencias) {
+        int valor = motorInferencias.pedirValorEntero(iHecho.getPregunta());
+        return new HechoEntero(iHecho.getNombre(), valor, null, 0);
     }
 
     // Crea un hecho booleano
-    static IHecho CrearHechoBooleen(IHecho f, MotorInferencias m) {    
-        boolean valorB = m.PedirValorBooleano(f.Pregunta());
-        return new HechoBooleen(f.Nombre(), valorB, null, 0);
+    static IHecho crearHechoBooleen(IHecho iHecho, MotorInferencias motorInferencias) {    
+        boolean valorB = motorInferencias.pedirValorBooleano(iHecho.getPregunta());
+        return new HechoBooleen(iHecho.getNombre(), valorB, null, 0);
     }
 
     // Crea un nuevo hecho a partir de su cadena
-    public static IHecho Hecho(String hechoStr) {
+    public static IHecho hecho(String hechoStr) {
         hechoStr = hechoStr.trim();
         if (hechoStr.contains("=")) {
             // Existe el símbolo "=", por lo que es un hecho entero
@@ -53,8 +56,7 @@ public class HechoFactory {
                 }
                 return new HechoEntero(nombreValorPregunta[0].trim(), Integer.parseInt(nombreValorPregunta[1].trim()), pregunta, 0);
             }
-        }
-        else {
+        } else {
             // Es un hecho booleano nombre[(pregunta)] o !nombre[(pregunta)]
             boolean valor = true;
             if (hechoStr.startsWith("!")) {

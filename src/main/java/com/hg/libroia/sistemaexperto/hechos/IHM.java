@@ -1,12 +1,12 @@
 package com.hg.libroia.sistemaexperto.hechos;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.hg.libroia.sistemaexperto.reglas.Regla;
 
 public interface IHM {
-    int PedirValorEntero(String pregunta); 
-    boolean PedirValorBooleano(String pregunta); 
-    void MostrarHechos(ArrayList<IHecho> hechos); 
-    void MostrarReglas(ArrayList<Regla> reglas); 
+    int pedirValorEntero(String pregunta); 
+    boolean pedirValorBooleano(String pregunta); 
+    void mostrarHechos(List<IHecho> hechos); 
+    void mostrarReglas(List<Regla> reglas); 
 }

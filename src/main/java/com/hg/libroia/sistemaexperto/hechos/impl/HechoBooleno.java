@@ -2,42 +2,43 @@ package com.hg.libroia.sistemaexperto.hechos.impl;
 
 import com.hg.libroia.sistemaexperto.hechos.IHecho;
 
-// Clase para los hechos booleanos (comme el hecho de être o no un triangulo)
+// Clase para los hechos booleanos (como el hecho de si es o no un triangulo)
 class HechoBooleen implements IHecho {
 
     // Nombre del hecho
-    protected String nombre;
-    public String Nombre() {
+    private String nombre;
+    // Valor booleano del hecho
+    private boolean valor;
+    // Nivel (0 para los hechos como entrada)
+    private int nivel;
+    // Pregunta que se debe hacer al usuario si es necesario
+    private String pregunta;
+
+    // Constructor
+    public HechoBooleen(String nombre , boolean valor, String pregunta, int nivel) {
+        this.nombre = nombre ;
+        this.valor = valor;
+        this.pregunta = pregunta;
+        this.nivel = nivel;
+    }
+    
+    public String getNombre() {
         return nombre;
     }
 
-    // Valor booleano del hecho
-    protected boolean valor;
-    public Object Valor() {
+    public Object getValor() {
         return valor;
     }
 
-    // Nivel (0 para los hechos como entrada)
-    protected int nivel;
-    public int Nivel() {
+    public int getNivel() {
         return nivel;
     }
     public void setNivel(int n) {
         nivel = n;
     }
     
-    // Pregunta que se debe hacer al usuario si es necesario
-    protected String pregunta;
-    public String Pregunta() {
+    public String getPregunta() {
         return pregunta;
-    }
-
-    // Constructor
-    public HechoBooleen(String _nombre , boolean _valor, String _pregunta, int _nivel) {
-        nombre = _nombre ;
-        valor = _valor;
-        pregunta = _pregunta;
-        nivel = _nivel;
     }
 
     // Métodos toString (para la visualización)
@@ -45,10 +46,9 @@ class HechoBooleen implements IHecho {
     @Override
     public String toString() { 
         String res = ""; 
-        if (!valor) { 
+        if (!this.valor) { 
             res += "!"; 
         } 
-        res += nombre + " (" + nivel + ")"; 
+        res += this.nombre + " (" + nivel + ")"; 
         return res; 
-    } 
-}
+    } }
